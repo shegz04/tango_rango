@@ -1,0 +1,13 @@
+<ul>
+   {% if all_categories %}
+    {% for cats in all_categories %}
+      {% if cats == active_all_cat %}
+        <li><strong><a href="{% url 'show_category' cats.slug %}">{{ cats.name }}</a></strong></li>
+      {% else %}
+        <li><a href="{% url 'show_category' cats.slug %}">{{ cats.name }}</a></li>
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    <li><strong>There are no categories present.</strong></li>
+  {% endif %}
+</ul>

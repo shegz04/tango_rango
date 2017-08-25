@@ -1,0 +1,33 @@
+<!Doctype html>
+{% load staticfiles %}
+{% load rango_template_tags %}
+<html>
+  <head>
+    <meta="charset=UTF-8" />
+    <title>Rango - {% block title %}How to Tango with Django{% endblock %}</title>
+  </head>
+  <body>
+    <div>
+      {% block body %}
+
+      {% endblock %}
+    </div>
+      <hr />
+
+    <div>
+      {% block sidebar %}
+        {% get_category_list category %}
+      {% endblock %}
+    </div>
+    <hr />
+    
+    <div>
+      <ul>
+        <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'index' %}">Home</a></li>
+      </ul>
+    </div>
+
+  </body>
+</html>

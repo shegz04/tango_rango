@@ -4,9 +4,17 @@
 <html>
   <head>
     <meta="charset=UTF-8" />
-    <title>Rango - {% block title %}How to Tango with Django{% endblock %}</title>
+    <title>Rango - {% block title_block %}How to Tango with Django{% endblock %}</title>
   </head>
   <body>
+    {% block header %}
+      {% if user.is_authenticated %}
+        Hello {{ user.username }}
+        <hr />
+      {% endif %}
+    {% endblock %}
+
+
     <div>
       {% block body %}
 
@@ -20,12 +28,18 @@
       {% endblock %}
     </div>
     <hr />
-    
+
     <div>
       <ul>
-        <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
-        <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About</a></li>
+        {% if user.is_authenticated %}
+          <li><a href="{% url 'add_category' %}">Add a New Category</a></li>
+          <li><a href="{% url 'logout' %}">Logout</a></li>
+        {% else %}
+          <li><a href="{% url 'register' %}">Sign Up</a></li>
+          <li><a href="{% url 'login' %}">Login</a></li>
+        {% endif %}
       </ul>
     </div>
 

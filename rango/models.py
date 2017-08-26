@@ -1,5 +1,8 @@
 from django.db import models
 from django.template.defaultfilters import slugify
+# Because we reference a User model, we need to import it within models.py
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 class Category(models.Model):
@@ -27,3 +30,15 @@ class Page(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class UserProfile(models.Model):
+    # This links UserProfile to  a User model instance
+    user = models.OneToOneField(User)
+
+    # Additional attributes to include
+    website =  models.URLField(blank=True)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+
+    def __str__(self):
+        return self.user.username
